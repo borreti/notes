@@ -1,0 +1,2 @@
+# notes
+Training project
