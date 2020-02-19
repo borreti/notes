@@ -22,10 +22,16 @@ environment:
   stage: dev
 
 functions:
-  hello:
-    handler: handler.hello
+  GetAllNotes:
+    handler: lambdas/getAllNotes.handler
+    role: NotesLambdaRole
+    events:
+      - http:
+          path: notes
+          method: get
+          # cors: true
 
 
 resources:
   - ${file(resources/dynamodb.yml)}
-  # - ${file(resources/lambdaRole.yml)}
+  - ${file(resources/lambdaRole.yml)}
