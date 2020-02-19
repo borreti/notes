@@ -6,7 +6,7 @@ Resources:
       AttributeDefinitions:
         - AttributeName: userID
           AttributeType: S
-        - AttributeName: tittle
+        - AttributeName: title
           AttributeType: S
         - AttributeName: noteID
           AttributeType: S
@@ -21,7 +21,7 @@ Resources:
         KeySchema:
         - AttributeName: noteID
           KeyType: HASH
-        - AttributeName: tittle
+        - AttributeName: title
           KeyType: RANGE
         Projection:
           ProjectionType: ALL
