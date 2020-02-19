@@ -1,0 +1,32 @@
+Resources:
+  NotesDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: notes-database
+      AttributeDefinitions:
+        - AttributeName: userID
+          AttributeType: S
+        - AttributeName: note_desc
+          AttributeType: S
+        - AttributeName: noteID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: noteID
+          KeyType: HASH
+        - AttributeName: userID
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+      - IndexName: note-index
+        KeySchema:
+        - AttributeName: note_desc
+          KeyType: HASH
+        - AttributeName: userID
+          KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+Outputs:
+  NotesDynamoDbARN:
+    Description: "Notes-Database DynamoDB ARN"
+    Value:
+      "Fn::GetAtt": [ NotesDynamoDBTable, Arn ]
