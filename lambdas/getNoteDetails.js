@@ -15,19 +15,24 @@ export async function handler(event, context){
     if (!(event.pathParameters.noteid))
         return failure(404, {msg: "There is no noteid to make the query!"});
 
+    // ToDo: Make this captured with cognito
+    const usrid = "robert";
+
     const params = {
         TableName: "notes-database",
-        IndexName: 'note-index',
+        // IndexName: 'note-index',
         ExpressionAttributeNames: {
-            "#notedesc": "note_desc",
+            // "#notedesc": "note_desc",
             "#userIdentifier": "userID",
             "#noteIdentifier": "noteID"
         },
         ExpressionAttributeValues: {
-            ":desc": "NOTE",
-            ":nid": event.pathParameters.noteid
+            // ":desc": "NOTE",
+            ":nid": event.pathParameters.noteid,
+            ":uid": usrid
         },
-        KeyConditionExpression: "#notedesc = :desc and #noteIdentifier = :nid"
+        KeyConditionExpression: "#noteIdentifier = :nid and #userIdentifier = :uid"
+        // FilterExpression: "#noteIdentifier = :nid"
     };
 
     const result = await dynamoDbLib.call("query", params);
@@ -36,6 +41,6 @@ export async function handler(event, context){
         return success(result.Items);
     }
     else{
-        return failure(404, {"msg": "There is no item on dynamodb"});
+        return failure(404, {"msg": "The query doesn't found any results. Check the ID that you passed."});
     }
 }
