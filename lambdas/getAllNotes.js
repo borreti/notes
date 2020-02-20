@@ -22,7 +22,7 @@ export async function handler(event, context){
         KeyConditionExpression: "#notedesc = :desc"
     }
 
-    const result = await dynamoDbLib("query", params);
+    const result = await dynamoDbLib.call("query", params);
     // console.log("RESULT: ", result);
     if(result.Items.length > 0){
         return success(result.Items);
