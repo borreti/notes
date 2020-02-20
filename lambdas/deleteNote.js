@@ -1,6 +1,5 @@
 import * as dynamoDbLib from '../utils/dynamodblib';
 import {success, failure} from '../utils/responselib';
-const util = require('util')
 
 /**
  * Entry point
@@ -17,7 +16,7 @@ export async function handler(event, context){
         return failure(404, {msg: "There is no noteid to make the query!"});
 
     // ToDo: make the user captured from cognito
-    const usrid = "robert"
+    const usrid = "robert";
 
     const params = {
         TableName: "notes-database",
@@ -34,7 +33,7 @@ export async function handler(event, context){
     };
 
     const result = await dynamoDbLib.call("delete", params);
-    return success({item_deleted: "If the item exists, the delete was a success. If not, we will never know, because there is no error message"});
+    return success({statusMessage: "The item was deleted successfully!"});
     // if(result.Items.length > 0){
     //     return success(result.Items);
     // }
