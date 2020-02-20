@@ -32,7 +32,7 @@ export async function handler(event, context){
         }
     };
 
-    const result = await dynamoDbLib.call("delete", params);
+    await dynamoDbLib.call("delete", params);
     return success({statusMessage: "The item was deleted successfully!"});
     // if(result.Items.length > 0){
     //     return success(result.Items);
