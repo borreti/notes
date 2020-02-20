@@ -1,6 +1,5 @@
 import AWS from 'aws-sdk';
 
-
 /**
  * Runs a dynamoDb operation
  * @export
