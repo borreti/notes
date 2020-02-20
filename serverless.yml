@@ -4,6 +4,7 @@ plugins:
   - serverless-webpack
   - serverless-offline
 
+# do I really need add this package?
 package:
   artifact: .serverless/enacom-notes.zip
 
@@ -31,7 +32,22 @@ functions:
           method: get
           # cors: true
 
+  GetDetailsNote:
+    handler: lambdas/getNoteDetails.handler
+    role: NotesLambdaRole
+    events:
+      - http:
+          path: notes/{noteid}
+          method: get
 
+  DeleteNote:
+    handler: lambdas/deleteNote.handler
+    role: NotesLambdaRole
+    events:
+      - http:
+          path: notes/{noteid}
+          method: delete
+          
 resources:
   - ${file(resources/dynamodb.yml)}
   - ${file(resources/lambdaRole.yml)}
