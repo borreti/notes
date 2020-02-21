@@ -24,7 +24,7 @@ environment:
 
 functions:
   InsertNote:
-    handler: lambdas/manipulateNotes.insert
+    handler: lambdas/insertNote.handler
     role: NotesLambdaRole
     events:
       - http:
@@ -48,6 +48,14 @@ functions:
       - http:
           path: notes/{noteid}
           method: get
+
+  UpdateNote:
+    handler: lambdas/updateNote.handler
+    role: NotesLambdaRole
+    events:
+      - http:
+          path: notes/{noteid}
+          method: put
 
   DeleteNote:
     handler: lambdas/deleteNote.handler
